@@ -2,6 +2,7 @@ const path =  require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 const HTMLPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
+const ExtractPlugin = require('extract-text-webpack-plugin')
 /**
  * package.json中在script中设置的命令行变量都是存在process.env中，
  * 可由 process.env.变量名 来获取变量
@@ -20,21 +21,16 @@ const config = {
         loader: 'vue-loader'
       },
       {
-        test: /\.css$/,
-        use: [
-          'style-loader' ,  //将css内容写入html里面，在js中，以一段js 代码出现，作用是将样式写入html中
-          'css-loader'  //在css文件中，将内容读出来
-        ]
-        // loader : 'css-loader'
+        test: /\.jsx$/,
+        loader: 'babel-loader'
       },
-      {
-        test: /\.styl/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'stylus-loader'
-        ] 
-      },
+      // {
+      //   test: /\.css$/,
+      //   use: [
+      //     'style-loader' ,  //将css内容写入html里面，在js中，以一段js 代码出现，作用是将样式写入html中
+      //     'css-loader'  //在css文件中，将内容读出来
+      //   ]
+      // },
       {
         test: /\.(gif|jpg|jpeg|peg|svg)$/,
         use : [
@@ -69,6 +65,20 @@ const config = {
 }
 
 if(isDev){
+  config.module.rules.push({
+    test: /\.styl/,
+    use: [
+      'style-loader',
+      'css-loader',
+      {
+        loader: 'postcss-loader',
+        options: {
+          sourceMap : true,
+        }
+      },
+      'stylus-loader'
+    ] 
+  })
   //soure-map 代码的映射 ——最完整的映射
   config.devtool = '#cheap-module-eval-source-map' ; //这个模式是效率最高，映射情况也是最佳
   // webpack 2.0之后才有devServer这个配置项
@@ -92,6 +102,39 @@ if(isDev){
     new webpack.HotModuleReplacementPlugin() ,
     new webpack.NoEmitOnErrorsPlugin()
   )
+}else {
+  config.entry = {
+    app:path.join(__dirname , 'src/index.js'),
+    vendor:['vue']
+  }
+  config.output.filename = '[name].[chunkhash:8].js'  //此处一定是chunkhash,因为用hash时app和vendor的hash码是一样的了,这样每次业务代码更新,vendor也会更新,也就没有了意义.
+  config.module.rules.push({
+    test: /\.styl/,
+    use: ExtractPlugin.extract({
+      fallback : 'style-loader',
+      use: [
+        'css-loader',
+        {
+          loader: 'postcss-loader',
+          options: {
+            sourceMap : true,
+          }
+        },
+        'stylus-loader'
+      ]
+    })
+  })
+  config.plugins.push(
+    // new ExtractPlugin('styles.[contentHash:8].css')
+    new ExtractPlugin('styles.css'),
+    new webpack.optimize.CommonsChunkPlugin({          //定义静态文件打包
+      name: 'vendor'
+    }),
+    new webpack.optimize.CommonsChunkPlugin({          //定义静态文件打包
+      name: 'runtime'
+    }),
+  )
 }
+
 
 module.exports = config
