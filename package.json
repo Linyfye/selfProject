@@ -13,17 +13,9 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.config.client.js",
     "precommit": "npm run lint-fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Linyfye/ToDoProject.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Linyfye/ToDoProject/issues"
-  },
-  "homepage": "https://github.com/Linyfye/ToDoProject#readme",
   "dependencies": {
     "vue": "^2.6.10"
   },
