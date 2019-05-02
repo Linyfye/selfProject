@@ -8,22 +8,22 @@
 </template>
 
 <script>
-import Header from './todo/header.vue'
-import Footer from './todo/footer.jsx'
-import Todo from './todo/todo.vue'
+import Header from './layout/header.vue'
+import Footer from './layout/footer.jsx'
+import Todo from './views/todo/todo.vue'
 
 export default {
-  data() {
+  data () {
     return {
-      text: "abcd"
+      text: 'abcd'
     }
   },
   components: {
     Header,
     Footer,
-    Todo,
+    Todo
   }
-};
+}
 </script>
 
 <style lang="stylus" scoped>
@@ -57,4 +57,3 @@ export default {
   justify-content center
 }
 </style>
-

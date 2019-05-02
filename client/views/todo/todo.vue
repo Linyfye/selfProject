@@ -7,14 +7,14 @@
       placeholder="接下去要做什么？"
       @keyup.enter="addTodo"
     >
-    <item 
+    <item
       :todo="todo"
       v-for="todo in filteredTodos"
       :key="todo.id"
       @del="deleteTodo"
       />
-    <tabs 
-      :filter="filter" 
+    <tabs
+      :filter="filter"
       :todos="todos"
       @toggle="togoleFilter"
       @clearAllCompleted="clearAllCompleted"
@@ -25,19 +25,19 @@
 <script>
 import Item from './item.vue'
 import Tabs from './tabs.vue'
-let id = 0 
+let id = 0
 export default {
-  data() {
+  data () {
     return {
-      todos:[],
+      todos: [],
       filter: 'all'
     }
   },
   components: {
     Item,
-    Tabs,
+    Tabs
   },
-  computed:{
+  computed: {
     filteredTodos () {
       if (this.filter === 'all') {
         return this.todos
@@ -47,24 +47,24 @@ export default {
     }
   },
   methods: {
-    addTodo(e){
+    addTodo (e) {
       this.todos.unshift({
-        id : id++,
-        content : e.target.value.trim(),
-        completed : false
+        id: id++,
+        content: e.target.value.trim(),
+        completed: false
       })
       e.target.value = ''
     },
-    deleteTodo(id){
-      this.todos.splice(this.todos.findIndex(todo => todo.id == id), 1);
+    deleteTodo (id) {
+      this.todos.splice(this.todos.findIndex(todo => todo.id === id), 1)
     },
-    togoleFilter(state) {
-      this.filter = state;
+    togoleFilter (state) {
+      this.filter = state
     },
     clearAllCompleted () {
       this.todos = this.todos.filter(todo => !todo.completed)
       // this.deleteAllCompleted()
-    },
+    }
   }
 }
 </script>

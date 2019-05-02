@@ -1,9 +1,19 @@
 <template>
-  <header class="main-header">
-  <!-- <header :class="$style.mainHeader"> -->
+  <header :class="$style.mainHeader">
     <h1>JTodo</h1>
   </header>
 </template>
+<script>
+export default {
+  // computed: {
+  //   $style(){
+  //     return {
+  //       mainHeader: "[path]-[name]-[hase:5]"
+  //     }
+  //   }
+  // }
+}
+</script>
 
 <style lang="stylus" module>
 .main-header{
