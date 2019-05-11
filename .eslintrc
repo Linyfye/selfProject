@@ -8,5 +8,8 @@
     "parser": "babel-eslint",
     "sourceType": "module",
     "allowImportExportEverywhere": false
+  },
+  "rules": {
+    "no-new": "off"
   }
 }

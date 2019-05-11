@@ -1,8 +1,8 @@
-const path =  require('path')
+const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 const HTMLPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
-const merge =  require('webpack-merge')
+const merge = require('webpack-merge')
 // const ExtractPlugin = require('extract-text-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const baseConfig = require('./webpack.config.base')
@@ -10,7 +10,7 @@ const baseConfig = require('./webpack.config.base')
 const isDev = process.env.NODE_ENV === 'development'
 const defaultPluins = [
   new webpack.DefinePlugin({
-    'process.env':{
+    'process.env': {
       NODE_ENV: isDev ? '"development"' : '"production"'
     }
   }),
@@ -19,15 +19,15 @@ const defaultPluins = [
 ]
 const devServer = {
   port: 8000,
-  host: '0.0.0.0' ,
+  host: '0.0.0.0',
   overlay: {
-    errors : true
+    errors: true
   }
 }
-let  config 
-if(isDev){
+let config
+if (isDev) {
   config = merge(baseConfig, {
-    mode: "development",
+    mode: 'development',
     devtool: '#cheap-module-eval-source-map',
     module: {
       rules: [
@@ -46,26 +46,26 @@ if(isDev){
             {
               loader: 'postcss-loader',
               options: {
-                sourceMap : true,
+                sourceMap: true
               }
             },
             'stylus-loader'
-          ] 
-        },
+          ]
+        }
       ]
     },
     devServer,
     plugins: defaultPluins.concat([
-      new webpack.HotModuleReplacementPlugin() ,
+      new webpack.HotModuleReplacementPlugin()
       // new webpack.NoEmitOnErrorsPlugin()
-    ]) 
+    ])
   })
-}else {
+} else {
   config = merge(baseConfig, {
-    mode: "production",
+    mode: 'production',
     entry: {
-      app:path.join(__dirname , '../client/index.js'),
-      vendor:['vue']
+      app: path.join(__dirname, '../client/index.js'),
+      vendor: ['vue']
     },
     output: {
       filename: '[name].[chunkhash:8].js'
@@ -75,12 +75,12 @@ if(isDev){
         {
           test: /\.styl/,
           use: [
-            MiniCssExtractPlugin.loader ,
+            MiniCssExtractPlugin.loader,
             'css-loader',
             {
               loader: 'postcss-loader',
               options: {
-                sourceMap : true,
+                sourceMap: true
               }
             },
             'stylus-loader'
@@ -90,8 +90,8 @@ if(isDev){
     },
     plugins: defaultPluins.concat([
       new MiniCssExtractPlugin({
-        filename : 'styles.css'
-      }),
+        filename: 'styles.css'
+      })
       // new webpack.optimize.CommonsChunkPlugin({          //定义静态文件打包
       //   name: 'vendor'
       // }),
