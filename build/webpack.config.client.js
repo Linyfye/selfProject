@@ -15,13 +15,21 @@ const defaultPluins = [
     }
   }),
   new VueLoaderPlugin(),
-  new HTMLPlugin()
+  new HTMLPlugin({
+    template: path.join(__dirname, 'template.html')
+  })
 ]
 const devServer = {
   port: 8000,
   host: '0.0.0.0',
   overlay: {
     errors: true
+  },
+  historyApiFallback: {
+    /*
+    * index.html为当前目录创建的template.html
+    */
+    index: '/index.html'
   }
 }
 let config

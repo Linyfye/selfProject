@@ -4,7 +4,10 @@
     <!-- <p>{{counter}}</p>
     <p>{{fullName}}</p> -->
     <Header></Header>
-    <todo></todo>
+    <router-link to="/app"> app </router-link>
+    <router-link to="/login"> login </router-link>
+    <router-view />
+    <!-- <todo></todo> -->
     <Footer></Footer>
   </div>
 </template>
