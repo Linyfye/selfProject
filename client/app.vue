@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div id="cover"></div>
-    <!-- <p>{{counter}}</p>
-    <p>{{fullName}}</p> -->
+    <!-- <p>{{counter}}</p> -->
     <Header></Header>
+    <p>{{fullName}}</p>
     <router-link to="/app"> app </router-link>
     <router-link to="/login"> login </router-link>
     <router-view />
