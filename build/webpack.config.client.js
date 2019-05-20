@@ -5,6 +5,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 // const ExtractPlugin = require('extract-text-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const VueClientPlugin = require('vue-server-renderer/client-plugin')
 const baseConfig = require('./webpack.config.base')
 
 const isDev = process.env.NODE_ENV === 'development'
@@ -17,7 +18,8 @@ const defaultPluins = [
   new VueLoaderPlugin(),
   new HTMLPlugin({
     template: path.join(__dirname, 'template.html')
-  })
+  }),
+  new VueClientPlugin()
 ]
 const devServer = {
   port: 8000,

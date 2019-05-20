@@ -81,8 +81,6 @@ export default () => {
     //   }
     // }
   })
-
-  console.log(module.hot, 'miss you ~!')
   /**
    * 配置vuex的热更新功能
    */

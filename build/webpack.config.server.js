@@ -1,4 +1,5 @@
 const path = require('path')
+const { VueLoaderPlugin } = require('vue-loader')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
@@ -43,6 +44,7 @@ config = merge(baseConfig, {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"'
     }),
+    new VueLoaderPlugin(),
     new VueServerPlugin()
   ]
 })
