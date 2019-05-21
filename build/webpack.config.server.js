@@ -1,10 +1,11 @@
 const path = require('path')
-const { VueLoaderPlugin } = require('vue-loader')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+// const { VueLoaderPlugin } = require('vue-loader')
+// const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.config.base')
 const VueServerPlugin = require('vue-server-renderer/server-plugin')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 let config
 config = merge(baseConfig, {
@@ -23,7 +24,8 @@ config = merge(baseConfig, {
       {
         test: /\.styl/,
         use: [
-          MiniCssExtractPlugin.loader,
+          'vue-style-loader',
+          // MiniCssExtractPlugin.loader,
           'css-loader',
           {
             loader: 'postcss-loader',
@@ -37,9 +39,9 @@ config = merge(baseConfig, {
     ]
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'styles.css'
-    }),
+    // new MiniCssExtractPlugin({
+    //   filename: 'styles.css'
+    // }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development'),
       'process.env.VUE_ENV': '"server"'

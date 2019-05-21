@@ -2,7 +2,6 @@ const ejs = require('ejs')
 
 module.exports = async (ctx, renderer, template) => {
   ctx.headers['ContentType'] = 'text/html'
-
   const context = { url: ctx.path }
 
   try {

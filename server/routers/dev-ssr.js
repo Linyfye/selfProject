@@ -17,12 +17,12 @@ const serverCompiler = webpack(serverConfig)
 const mfs = new MemoryFS()
 serverCompiler.outputFileSystem = mfs
 
-let bundle
+let bundle // webpack每次打包生成新的文件
 serverCompiler.watch({}, (err, stats) => {
   if (err) throw err
   stats = stats.toJson()
   stats.errors.forEach(err => console.log(err))
-  stats.warnings.forEach(warn => console.warn(err))
+  stats.warnings.forEach(warn => console.warn(warn))
 
   const bundlePath = path.join(
     serverConfig.output.path,
@@ -46,7 +46,6 @@ const handleSSR = async (ctx) => {
   )
 
   const clientManifest = clientManifestResp.data
-  console.log(clientManifest, 'miss you ~!')
 
   const template = fs.readFileSync(
     path.join(__dirname, '../server.template.ejs'),

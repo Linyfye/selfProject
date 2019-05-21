@@ -3,11 +3,7 @@ import createApp from './create-app'
 export default context => {
   return new Promise((resolve, reject) => {
     const { app, router } = createApp()
-    console.log('===============================================')
-    console.log(router)
-    console.log(app)
-    console.log(context)
-    console.log('===============================================')
+
     router.push(context.url)
 
     /**
