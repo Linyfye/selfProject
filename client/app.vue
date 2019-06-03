@@ -7,6 +7,8 @@
     <router-link to="/app"> app </router-link>
     <router-link to="/login"> login </router-link>
     <router-view />
+    <button @click="notify">click me</button>
+    <!-- <notification content="test notify" /> -->
     <!-- <todo></todo> -->
     <Footer></Footer>
   </div>
@@ -62,6 +64,7 @@ export default {
     //   num: 5,
     //   time: 2000
     // })
+
   },
   computed: {
     // ...mapState(['count']),
@@ -79,7 +82,13 @@ export default {
   },
   methods: {
     ...mapMutations(['updateCount']),
-    ...mapActions(['updateCountAsync'])
+    ...mapActions(['updateCountAsync']),
+    notify () {
+      this.$notify({
+        content: 'test $notify',
+        btn: 'close'
+      })
+    }
   }
 }
 </script>
