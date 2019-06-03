@@ -31,7 +31,7 @@ const devServer = {
     /*
     * index.html为当前目录创建的template.html
     */
-    index: '/index.html'
+    index: '/public/index.html'
   }
 }
 let config
@@ -74,11 +74,12 @@ if (isDev) {
   config = merge(baseConfig, {
     mode: 'production',
     entry: {
-      app: path.join(__dirname, '../client/index.js'),
+      app: path.join(__dirname, '../client/client-entry.js'),
       vendor: ['vue']
     },
     output: {
-      filename: '[name].[chunkhash:8].js'
+      filename: '[name].[chunkhash:8].js',
+      publicPath: '/public/'
     },
     module: {
       rules: [

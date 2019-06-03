@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <!-- <title>Document</title> -->
+  <%- title %>
   <!--
     <%- %> : 标签里面的内容不会被转义
     <%= %> : 标签里面的内容会被转义
@@ -12,7 +13,7 @@
   <%- style %>
 </head>
 <body>
-  <%- appString %>
+  <div id="root"><%- appString %></div>
 
   <%- scripts %>
 </body>

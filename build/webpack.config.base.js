@@ -4,10 +4,12 @@ const createVueLoaderOptions = require('./vue-loader.config')
 const isDev = process.env.NODE_ENV === 'developemt'
 
 const config = {
-  entry: path.join(__dirname, '../client/index.js'),
+  entry: path.join(__dirname, '../client/client-entry.js'),
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, '../dist')
+    path: path.join(__dirname, '../public'),
+    publicPath: '/public/'
+    // publicPath: 'http://127.0.0.1:8000/public'
   },
   module: {
     rules: [
@@ -42,7 +44,7 @@ const config = {
                */
               limit: 1024,
               // name: 'resources/[path][name].[hash:8].[ext]'
-              name: 'resources/[path][name]-aaa.[ext]'
+              name: '/resources/[path][name].[ext]'
             }
           }
         ]

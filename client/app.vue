@@ -25,6 +25,9 @@ import Footer from './layout/footer.jsx'
 import Todo from './views/todo/todo.vue'
 
 export default {
+  metaInfo: {
+    title: 'linhaha\'s Todo App'
+  },
   data () {
     return {
       text: 'abcd'
